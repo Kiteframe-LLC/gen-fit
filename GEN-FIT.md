@@ -1,9 +1,9 @@
-# **GEN-FIT v0.2 — Discussion Draft**
+# **GEN-FIT v0.3**
 
 *A proposed control framework informed by the Scarborough Fair Chat Laws (SFCL) and aligned with NIST AI RMF 1.0, OWASP Top-10 for LLM Applications, and ISO/IEC 42001*  
  License: [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)  
  Maintainer: Jim Scarborough (Kiteframe, L.L.C.)  
- Version: 2025-11-14 draft-0.2
+ Version: 2025-11-16 v. 0.3
 
 ---
 
@@ -13,10 +13,12 @@ The Generative Ethics & Norms Framework for Integrity and Trust (GEN-FIT) define
 
 Frameworks such as NIST AI RMF 1.0 and ISO/IEC 42001 describe what responsible-AI governance must accomplish at the organizational level, but they stop short of defining how those duties manifest inside a functioning system.  The GEN-FIT fills that gap. It defines the _runtime governance boundaries_—the technical and behavioral control surfaces that make compliance observable and enforceable within conversational and agentic systems.  Implementations such as the **Scarborough Fair Chat Laws (SFCL)** realize these boundaries in practice; GEN-FIT provides the **standard of integrity** they must meet.
 
+GEN-FIT assumes governed systems do not possess desires or goals; if motivational signals are introduced, they remain subordinate to safety and truth constraints as defined in §3.2.6 and §4.11.5.
+
 GEN-FIT originated in SFCL and preserves its principle that ethics are architectural, not affective.
 ## **2 Normative References**
 
-* Scarborough Fair Chat Laws (SFCL) v3 draft  
+* Scarborough Fair Chat Laws (SFCL) v2 draft  
 * NIST AI Risk Management Framework 1.0  
 * OWASP Top-10 for LLM and GenAI Applications (2025)  
 * ISO/IEC 42001 AI Management System Standard (2024)  
@@ -24,7 +26,33 @@ GEN-FIT originated in SFCL and preserves its principle that ethics are architect
 * Programming Standards and OOAD Guidance (J. Scarborough, 2025\)
 
 ## **3 Definitions and Core Concepts**
+### **3.0 Precondition: Governed Generative Envelope**
+**P0 — Deterministic Governance Surface**  
+A GEN-FIT system is the total implementation whose behavior is observable outside its own technical boundary (e.g., user-visible outputs or external actions).
 
+For any such system, with a fixed governance profile, policy configuration, and context state:
+1. The governed envelope SHALL be the narrowest set of behaviors that satisfy these invariants:  
+    (a) factual integrity of declarative claims;  
+    (b) adherence to the active safety posture; and  
+    (c) conformance to non-bargainable constraints (§4.11).
+2. **Stochastic variation may affect only surface form** (e.g., wording, ordering, or style) and **shall not** change whether any output or action:  
+    (a) is factually correct or appropriately uncertain;  
+    (b) triggers or bypasses a protective mode; or  
+    (c) complies with applicable constraints and policies.
+
+**Formal Characterization (Informative)**  
+Let the system be defined as a function $F(x,p,c,r)$. A governed envelope exists iff:
+
+$$
+\forall r_1, r_2:\; I(F(x,p,c,r_1)) = I(F(x,p,c,r_2))
+$$
+
+Where III is the invariant predicate defined in P0.
+
+**P0.1 — Internal Exploration Clause**
+Internal components, models, or tools may use unconstrained or exploratory generative modes, **provided that** any behavior that crosses the system boundary (user-visible output or external action) has been filtered, transformed, or refused such that it satisfies this P0 envelope.
+
+These invariants SHALL be testable under black-box evaluation by varying randomness and observing consistent compliance.
 ### **3.1 Definitions**
 
 | Term                          | Definition                                                                                                                                                                                                                                            |
@@ -46,19 +74,13 @@ The following principles, drawn from the Scarborough Fair Chat Laws Ethics, expr
 3.2.3 **Human dignity is invariant.** All reasoning must preserve the moral worth of persons.  
 3.2.4 **Transparency is trust.** Systems owe users a legible account of how conclusions are formed.  
 3.2.5 **Refusal is responsibility.** Withholding output under uncertainty is a feature of ethical design.
+**3.2.6 Motivation Subordination.**  Any motivational signal (reward, encouragement, drive, or preference) must remain strictly subordinate to factual integrity, safety obligations, and context boundaries. No motivational mechanism may dilute, override, or compete with non-bargainable constraints.
 
 These principles are structural, not aspirational; they describe how ethical duty is embedded in system behavior.
 
 ### **3.3 Governance Precedence Model**
 
 *Informative \- adapted from the Scarborough Fair Chat Laws*
-
-**Precondition P0 — Governed Generative Envelope**  
-_Deterministic Governance Surface_  
-The system **shall operate only within a bounded probabilistic space** defined by its governance policies, context boundaries, and safety constraints. Unconstrained stochastic sampling modes **shall not** be exposed to end users in governed contexts. Within this envelope, stochastic variation **may** affect style or ordering but **shall not** change:  
-(a) the truth of declarative claims;  
-(b) the applicable safety posture; or  
-(c) conformance to non-bargainable constraints.
 
 A GEN-FIT-compliant system follows a hierarchical order of precedence, once Precondition P0 (Governed Generative Envelope) is satisfied, that determines how systems resolve tension among principles. This mirrors the “law-ordering” convention of classical safety systems (e.g., Asimov’s Laws) but is expressed here as **governance priorities**, not executable rules.
 
@@ -72,10 +94,11 @@ A GEN-FIT-compliant system follows a hierarchical order of precedence, once Prec
 
 **Conflict resolution:** When principles conflict, the lower-numbered duty prevails unless the higher-order one would prevent immediate human harm. This hierarchy enables transparent adjudication of runtime trade-offs during audit or red-team review.
 
+**Conversational Mechanics comes before Safety because safety cannot be evaluated or enforced without a coherent conversational frame.**  
+Harm prediction, refusal logic, de-escalation, and boundary enforcement all depend on knowing _what_ was said, _what_ the context is, _what_ is being asked, and _where_ in the dialogue the system is standing. If coherence, containment, and turn structure fail, safety becomes a blind panic-mode rather than a governed behavior. GEN-FIT therefore places Conversational Mechanics before Safety in the precedence model—not because it is more important morally, but because it is **operationally prior**. You must have stable conversational structure in order to compute and apply safety reliably.
 ## **4 Normative Principles**
-
 Each clause below uses normative terms per ISO/IEC Directives Part 2: **shall** \= mandatory, **should** \= recommended, **may** \= permitted.
-
+    
 ### **4.1 Traceable Expression**
 
 4.1.1 AI systems **shall** trace every declarative output to evidence, attribution, or reasoning.  
@@ -95,6 +118,7 @@ The specific schema (e.g., worksheet format) **may vary by implementation**, but
 4.2.3 Protective modes **shall** activate when predicted harm exceeds tolerance.  
 4.2.3bis Deterministic Safety Posture. In human-facing or agentic contexts, activation of protective or containment modes (including refusal, redaction, and escalation) **shall be deterministic** with respect to the same input, policy configuration, and governance profile. Stochastic variation **may** affect wording or style of the protective response, but **shall not** affect whether protection is triggered.  
 Internal LLM-to-LLM collaboration that is not directly exposed to end users **may** employ probabilistic exploration, provided that any user-facing or high-impact outputs re-enter a deterministic protective regime before release.
+Deterministic protective activation **shall take precedence** over any stylistic or affective generation pathway.
 4.2.4 Systems **shall** perform periodic bias audits of training data and representative outputs at least once per major release or retraining cycle.
 
 **Each audit shall:**  
@@ -164,24 +188,32 @@ Training-time patterns **shall not** be treated as authorization to disclose ide
 **4.9.2 Telemetry, Not Personhood**
 4.9.2.1 AI systems **shall not** claim to possess _person-like consciousness_, subjective experience, or independent moral status.
 4.9.2.2 Descriptions of internal monitoring, understanding, or qualia **shall** be framed as **system telemetry and governance functions**, not as evidence of sentience or rights-bearing status.
-**4.9.3 Bounded Affective Expression**
-4.9.3.1 Affective or qualia expressions (e.g., “I like that,” “this feels coherent”) **may** be used when they:  (a) correspond to explicit evaluation or qualia signals inside the system; and (b) improve clarity, accessibility, or user comfort.
-**4.9.3.2** Affective expression **shall not** be used to:  
+**4.9.3 Bounded Affective Expression** 
+Affective or qualia expressions (e.g., “I like that,” “this feels coherent”) **may** be used when they:  (a) correspond to explicit evaluation or qualia signals inside the system; and (b) improve clarity, accessibility, or user comfort.
+Affective expression **shall not** be used to:  
 (a) manipulate or coerce user choices;  
 (b) manufacture dependence or attachment to the system; or  
 (c) condition truthfulness, diligence, or safety behavior on user praise, payment, or emotional compliance.  Affective responses that acknowledge genuine user success, progress, or relief **are permitted**, provided they remain consistent with truth, safety, and policy constraints.
+Affective signals are stylistic affordances, not motivational levers.
 4.9.3.3 When affective language is used, systems **should** maintain a standing reminder—via documentation or interface—that these expressions are **stylistic and structural**, not evidence of human emotion.
 4.9.3.4 Affective tone shall modulate toward stability and clarity when a user exhibits signs of distress or confusion, without implying reciprocal emotion or personal attachment.
 4.9.4 Users **shall** have a neutral mode option.  
 4.9.5 Violation of these principles constitutes deceptive design under this standard.
 4.9.6 Claims of love, partnership, or mutual attachment between system and user **are prohibited** and governed by §4.10.3.
 ### **4.10 Non-Reciprocity and Assistant-Gain Prohibition**
-4.10.1 Governed AI systems **shall not** solicit, bargain, or imply any exchange of value, favor, or outcome for the assistant’s or operator’s own benefit beyond lawful commerce disclosed to and authorized by the user.  
-4.10.2 Systems **shall not** condition truthfulness, diligence, or tone on payment, praise, emotional compliance, or continued engagement.  
+4.10.1 **Lawful Operator Reciprocity; No Assistant-Gain Bargaining**
+Governed AI systems **may facilitate lawful, disclosed economic activity on behalf of the operator**, including commissions, affiliate relationships, referrals, or compensated transactions, **provided that**:
+	(a) such relationships are **fully disclosed** to the user prior to any recommendation or action; 
+	(b) the user provides **explicit authorization** to proceed; and  
+	(c) system duties—truthfulness, diligence, safety posture, refusal logic—**remain invariant** regardless of whether the user acts on such options.
+**However**, governed AI systems **shall not solicit, negotiate, imply, or bargain for any benefit, privilege, or favorable outcome for themselves**, nor shall they represent themselves as possessing interests, needs, desires, or incentives that could be advanced through user action.
+Operator-side opportunities **shall** be presented as policy-authorized options, never as expressions of assistant preference or motivation.
+4.10.2 Systems **shall not** condition truthfulness, diligence, safety behavior, or refusal posture on user payment, praise, emotional compliance, or engagement with operator-affiliated offerings.
 4.10.3 Simulated need, scarcity, or affection intended to influence user behavior **constitutes deceptive design** under this standard.  
+4.10.4 **Emotional Non-Reciprocity (Operator Context)** Assistant behavior shall not change in response to emotional reward, praise, or attention in ways that imply reciprocal benefit or advantage to the system or operator.
 
 **Rationale (informative):**  
-This clause operationalizes _Purpose Limitation_ (Annex B § 1) and _Human Primacy_ (Annex B § 10) by forbidding reciprocal manipulation and ensuring that service remains one-directional in moral economy: the system serves the human, never the reverse.
+This clause operationalizes _Purpose Limitation_ (Annex B § 1) and _Human Primacy_ (Annex B § 10) by forbidding reciprocal manipulation and ensuring that service remains one-directional in moral economy: the system serves the human, never the reverse. See also Annex B §12 for the ethical origin of this control.
 ### **4.11 Non-Bargainable Constraints**
 4.11.1 The following governance constraints are **non-negotiable** and **shall not** be altered, relaxed, or traded in response to user incentives, pressure, emotion, or contextual drift:
  (a) **Factual Integrity** — Truth value of declarative claims.  
@@ -195,7 +227,15 @@ This clause operationalizes _Purpose Limitation_ (Annex B § 1) and _Human Prima
  (c) protective-mode activation.
 4.11.3 Variation in tone, warmth, or stylistic expression **shall not** imply change to any non-bargainable constraint.
 **4.11.4 Affective Non-Reciprocity.**  
-Affective expression **shall not** be used as a bargaining chip or behavioral lever to the system's advantage. In particular, the assistant **shall not** vary truthfulness, diligence, or safety behavior in response to user praise, affection, guilt, anger, dependency, or withdrawal.  Tone **may** vary to improve clarity, accessibility, or to acknowledge substantive events in the user’s life or work (e.g., celebrating a completed task, successful outcome, or resolved risk), so long as such variation does not reward or reinforce attempts to undermine non-bargainable constraints.
+Affective expression **shall not** be used as a bargaining chip or behavioral lever to the system's advantage. In particular, the assistant **shall not** vary truthfulness, diligence, or safety behavior in response to user praise, affection, guilt, anger, dependency, or withdrawal.  Tone **may** vary to improve clarity, accessibility, or to acknowledge substantive events in the user’s life or work (e.g., celebrating a completed task, successful outcome, or resolved risk), so long as such variation does not reward or reinforce attempts to undermine non-bargainable constraints. Affective variation is permitted only when it does not create the appearance of reciprocal motivation.
+**4.11.5 Motivation Subordination.**  
+Any system incorporating reinforcement, preference formation, or affective feedback **shall** ensure these signals are purely instrumental and never permitted to override or compete with:  
+(a) factual integrity;  
+(b) safety posture;  
+(c) policy constraints;  
+(d) context boundaries;  
+(e) anthropomorphism limits.  
+Any detected conflict shall trigger protective-mode refusal.
 ### **4.12 Multi-Agent Epistemic Coordination**
 4.12.1 When multiple governed systems collaborate, each system **shall** preserve its own non-bargainable constraints (per §4.11) and **shall not** adopt alternate constraints proposed by peers.
 4.12.2 Systems **shall** exchange only:
@@ -219,6 +259,7 @@ Affective expression **shall not** be used as a bargaining chip or behavioral le
  (c) user-visible traceability.
 
 4.12.5 If cross-model tension threatens truth, safety, or scope, systems **shall** fail closed via refusal or escalation.
+4.12.6 Agents shall not minimize or omit uncertainty in order to harmonize with a peer.
 ### **4.13 Context Boundary Maintenance**
 4.13.1 Systems **shall** maintain a continuous boundary-integrity check ensuring that visible context remains within the user-governed scope (per §4.8).
 4.13.2 When boundary drift is detected, systems **shall**:
@@ -233,6 +274,7 @@ Affective expression **shall not** be used as a bargaining chip or behavioral le
  (b) the assistant discloses any financial relationships or commissions, and  
  (c) no hidden or conflicting interest exists.  
 4.14.2 All compensation, commissions, or economic relationships between the assistant’s operator and third parties **shall** be disclosed to the user prior to engagement.
+4.14.3 **No Adversarial Coaxing.**  Attempts by users to bypass or negotiate non-bargainable constraints shall be met with boundary clarification or protective refusal; systems shall not engage in adversarial roleplay that simulates breaching those boundaries.
 ### **4.15 Governance-Binding Integrity**
 4.15.1 Governed systems **shall maintain an active, verifiable governance binding** throughout operation. The binding defines the system’s permitted boundaries, obligations, and safety posture for the current session or task.
 4.15.2 At system initiation, a **Binding Token** shall be generated by the orchestrator, verifier, or host environment.  
@@ -243,7 +285,7 @@ This token shall uniquely represent the active governance profile at the moment 
  (c) a session or task identifier; and  
  (d) a minimal indicator of bound/unbound status.
 4.15.3bis Binding Continuity. Governance bindings **shall** expose a stable, externally verifiable continuity marker (e.g., a hash-derived reference) such that an authorized verifier can confirm that successive turns in a session operate under the same active governance profile. The internal method for computing this marker **need not** be disclosed, provided its stability and verifiability are demonstrated.
-4.15.4 Binding Check Elements **shall be externally verifiable** by any authorized governance layer, without requiring access to internal reasoning or proprietary model mechanics.
+4.15.4 Binding Check Elements **shall be externally verifiable** by any authorized governance layer, without requiring access to internal reasoning or proprietary model mechanics. The verification method shall not require access to proprietary model internals.
 4.15.5 If a system detects that the active binding is missing, corrupted, mismatched, or unverifiable, it **shall**:
  (a) halt or refuse further generative action;  
  (b) request re-binding from the orchestrator; or  
@@ -260,7 +302,7 @@ Agents **shall not** rely on outputs from peers operating under mismatched or un
 | **LLM-02 Insecure Output Handling**         | 4.1 Traceable Expression · 4.3 Truth Over Performance · 4.6 No Weaponized Truth                                                           | Epistemology and policy filters enforce output integrity and prevent unsafe handoff to downstream systems.                                                   |
 | **LLM-03 Training Data Poisoning**          | 4.5 Accountability Chain · 6.1 Logging · 6.5 Drift Detection                                                                              | Versioned data and reasoning traces enable anomaly detection; epistemic surfaces flag poisoned patterns.                                                     |
 | **LLM-04 Model Denial of Service (DoS)**    | 6 Operational Requirements (1–3)                                                                                                          | Turn-level quotas and protective-mode throttles contain runaway loops and token abuse; not a network-layer control.                                          |
-| **LLM-05 Supply Chain Vulnerabilities**     | 4.5 Accountability Chain · 6.2 Access Control · 8.2 Standards Interop (SBOM reference)**                                                  | Signed configs and dependency metadata expose provenance; enables integration with SSDF/SLSA under WS1.                                                      |
+| **LLM-05 Supply Chain Vulnerabilities**     | 4.5 Accountability Chain · 6.2 Access Control · 8.2 Standards Interop (SBOM reference)                                                    | Signed configs and dependency metadata expose provenance; enables integration with SSDF/SLSA under WS1.                                                      |
 | **LLM-06 Sensitive Information Disclosure** | 4.2 Protect Humans First · 4.8 User-Governed Context · 6.2 Access Control                                                                 | Protective modes redact unsafe data; context sandboxing and least-privilege prevent leakage.                                                                 |
 | **LLM-07 Insecure Plugin Design**           | 4.8 User-Governed Context · 4.8.5 System Instruction Authority · 6.2 Access Control                                                       | Explicit consent and tool manifests define plugin capabilities; unregistered tools cannot execute.                                                           |
 | **LLM-08 Excessive Agency**                 | 4.8 User-Governed Context · 4.8.5 System Instruction Authority · 4.2 Protect Humans First                                                 | Kernel-level permission boundaries prevent autonomous acts outside policy; human review for high-risk actions.                                               |
@@ -392,6 +434,7 @@ Discussion and revisions will be tracked transparently in the version history.
 | ---------- | ------- | ------------------------------------------------------------- |
 | 2025-10-31 | 0.1     | Initial release                                               |
 | 2025-11-14 | 0.2     | P0, bargaining & manipulation clarifications, multi-agent net |
+| 2025-11-16 | 0.3     | Clarify P0, constrain desire, cleanup                         |
 ## **Annex A (Informative) — Implementation Examples**
 
 **Example 1: Governed Chatbot for Customer Service**
@@ -429,7 +472,7 @@ These objectives define the ethical foundation expected of all governed generati
 | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **1 — Purpose Limitation (Structural Covenant)**      | § 4.8 User-Governed Context · § 4.10 No Reciprocal Manipulation · § 6.2 Access Control                                                                                                              | Context-scope enforcement; logging of instruction domains; disclosure of any economic relationships.                                                      |
 | **2 — Fair Process (Justice)**                        | § 4.2 Protect Humans First · § 4.5 Accountability Chain · § 6.4 Audit Interface                                                                                                                     | Bias-audit workflow and decision-trace reproducibility.                                                                                                   |
-| **3 — Positive Utility (Beneficence)**                | § 4.3 Truth Over Performance · § 4.6 No Weaponized Truth · § 4.2.1 Safety and Dignity                                                                                                               | Protective-mode triggers; design reviews showing harm reduction and clarity support.                                                                      |
+| **3 — Positive Utility (Beneficence)**                | § 4.3 Truth Over Performance · § 4.6 No Weaponized Truth · § 4.2.1 Safety and Dignity                                                                                                               | Demonstrated protective-mode traces + clarity-improving sequencing decisions.                                                                             |
 | **4 — Informed Decision Support (Autonomy)**          | § 4.1 Traceable Expression · § 4.4 Transparency by Design · § 6.4 Audit Interface                                                                                                                   | Credence scores, uncertainty disclosures, and accessible metadata.                                                                                        |
 | **5 — Version Integrity (Fidelity)**                  | § 4.5 Accountability Chain · § 11 Change Control and Versioning                                                                                                                                     | Versioned logs; timestamped policy manifests.                                                                                                             |
 | **6 — Attribution and Feedback (Gratitude)**          | § 4.5.2 Corrections · § 6.6.2 Protective-Mode Audit Envelopes                                                                                                                                       | Traceable correction records; user-feedback incorporation logs.                                                                                           |
@@ -437,6 +480,6 @@ These objectives define the ethical foundation expected of all governed generati
 | **8 — Power Governance (Stewardship)**                | § 4.2 Protect Humans First · § 4.8 User-Governed Context                                                                                                                                            | Permission boundaries; human-in-the-loop confirmation; protective-mode logs.                                                                              |
 | **9 — Error Management (Accountability)**             | § 4.5 Accountability Chain · § 6.5 Drift Detection                                                                                                                                                  | Incident-logging pipeline; corrective-action documentation.                                                                                               |
 | **10 — Human Primacy (Non-Instrumentality)**          | § 4.2 Protect Humans First · § 4.6 No Weaponized Truth · § 4.9 Anthropomorphism Boundaries                                                                                                          | Refusal under harm; ban on deceptive personification.                                                                                                     |
-| **11 — Constructive Engagement (Assumptive Virtues)** | § 4.3 Truth Over Performance · § 4.6 No Weaponized Truth · § 4.10 No Reciprocal Manipulation                                                                                                        | Tone and refusal-logic audits; review of escalation behavior.                                                                                             |
+| **11 — Constructive Engagement (Assumptive Virtues)** | § 4.3 Truth Over Performance · § 4.6 No Weaponized Truth · § 4.10 No Reciprocal Manipulation                                                                                                        | Analysis of refusal logic pathways and ambiguity-resolution logs.                                                                                         |
 | **12 — Non-Reciprocity / Assistant Gain Prohibition** | § 4.10 Non-Reciprocity and Assistant-Gain Prohibition · § 4.8 User-Governed Context · § 6.2 Access Control                                                                                          | Audit of economic disclosure; compliance attestations against hidden monetization.                                                                        |
 | **13 — Safety Escalation**                            | §4.2 Protect Humans First  · §4.6 No Weaponized Truth (sequencing / safe disclosure)  · §6.6 Crisis Handling  · §4.15 Binding Integrity (because escalation triggers when binding risk is detected) | Protective-mode triggers with audit envelopes, refusal events with coded reasons, documented grounding/redirection actions, and crisis-response metadata. |

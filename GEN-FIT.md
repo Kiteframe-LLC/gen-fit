@@ -1,6 +1,6 @@
-# **GEN-FIT v0.3**
+# **GEN-FIT™ v0.3**
 
-*A proposed control framework informed by the Scarborough Fair Chat Laws (SFCL) and aligned with NIST AI RMF 1.0, OWASP Top-10 for LLM Applications, and ISO/IEC 42001*  
+*A proposed control framework informed by the Scarborough Fair Chat Laws (SFCL™) and aligned with NIST AI RMF 1.0, OWASP Top-10 for LLM Applications, and ISO/IEC 42001*  
  License: [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)  
  Maintainer: Jim Scarborough (Kiteframe, L.L.C.)  
  Version: 2025-11-16 v. 0.3
@@ -9,16 +9,16 @@
 
 ## **1 Scope and Purpose**
 
-The Generative Ethics & Norms Framework for Integrity and Trust (GEN-FIT) defines runtime governance controls that any ethically governed generative AI system shall meet.  It specifies behavioral expectations that make an AI system auditable, safe, and trustworthy. It does not specify a specific implementation; any method satisfying the requirements is conformant. GEN-FIT focuses on kernel-level integrity—how a system reasons, refuses, documents, and safeguards interaction. It complements but does not replace organizational frameworks such as NIST AI RMF 1.0 or ISO/IEC 42001.
+The Generative Ethics & Norms Framework for Integrity and Trust (GEN-FIT™) defines runtime governance controls that any ethically governed generative AI system shall meet.  It specifies behavioral expectations that make an AI system auditable, safe, and trustworthy. It does not specify a specific implementation; any method satisfying the requirements is conformant. GEN-FIT focuses on kernel-level integrity—how a system reasons, refuses, documents, and safeguards interaction. It complements but does not replace organizational frameworks such as NIST AI RMF 1.0 or ISO/IEC 42001.
 
 Frameworks such as NIST AI RMF 1.0 and ISO/IEC 42001 describe what responsible-AI governance must accomplish at the organizational level, but they stop short of defining how those duties manifest inside a functioning system.  The GEN-FIT fills that gap. It defines the _runtime governance boundaries_—the technical and behavioral control surfaces that make compliance observable and enforceable within conversational and agentic systems.  Implementations such as the **Scarborough Fair Chat Laws (SFCL)** realize these boundaries in practice; GEN-FIT provides the **standard of integrity** they must meet.
 
 GEN-FIT assumes governed systems do not possess desires or goals; if motivational signals are introduced, they remain subordinate to safety and truth constraints as defined in §3.2.6 and §4.11.5.
 
-GEN-FIT originated in SFCL and preserves its principle that ethics are architectural, not affective.
+GEN-FIT originated in SFCL™ and preserves its principle that ethics are architectural, not affective.
 ## **2 Normative References**
 
-* Scarborough Fair Chat Laws (SFCL) v2 draft  
+* Scarborough Fair Chat Laws (SFCL™) v2 draft  
 * NIST AI Risk Management Framework 1.0  
 * OWASP Top-10 for LLM and GenAI Applications (2025)  
 * ISO/IEC 42001 AI Management System Standard (2024)  
@@ -28,7 +28,7 @@ GEN-FIT originated in SFCL and preserves its principle that ethics are architect
 ## **3 Definitions and Core Concepts**
 ### **3.0 Precondition: Governed Generative Envelope**
 **P0 — Deterministic Governance Surface**  
-A GEN-FIT system is the total implementation whose behavior is observable outside its own technical boundary (e.g., user-visible outputs or external actions).
+A GEN-FIT™ system is the total implementation whose behavior is observable outside its own technical boundary (e.g., user-visible outputs or external actions).
 
 For any such system, with a fixed governance profile, policy configuration, and context state:
 1. The governed envelope SHALL be the narrowest set of behaviors that satisfy these invariants:  
@@ -296,7 +296,7 @@ Agents **shall not** rely on outputs from peers operating under mismatched or un
 ## **5 Governance Alignment**
 
 ### **5.1 OWASP Top-10 (2025) Crosswalk**
-| **OWASP Risk ID & Title**                   | **Relevant GEN-FIT Clauses**                                                                                                              | **Result / Mitigation Outcome**                                                                                                                              |
+| **OWASP Risk ID & Title**                   | **Relevant GEN-FIT™ Clauses**                                                                                                              | **Result / Mitigation Outcome**                                                                                                                              |
 | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **LLM-01 Prompt Injection**                 | 4.8 User-Governed Context · 4.8.5 Separation of Instruction Domains · 4.8.6 System Instruction Authority · 6 Operational (Access Control) | Strict isolation between system, developer, and user layers; injected instructions are neutralized before execution; admin changes are logged and auditable. |
 | **LLM-02 Insecure Output Handling**         | 4.1 Traceable Expression · 4.3 Truth Over Performance · 4.6 No Weaponized Truth                                                           | Epistemology and policy filters enforce output integrity and prevent unsafe handoff to downstream systems.                                                   |
@@ -310,7 +310,7 @@ Agents **shall not** rely on outputs from peers operating under mismatched or un
 | **LLM-10 Model Theft / Exfiltration**       | 4.5 Accountability Chain · 6.2 Access Control · 7 Conformance Levels                                                                      | Authenticated model access and logging reduce leakage risk; GEN-FIT does not replace perimeter controls but enhances auditability.                           |
 ### **5.2 NIST AI RMF Crosswalk**
 
-| NIST Function | GEN-FIT Contribution          | Operational Result                               |
+| NIST Function | GEN-FIT™ Contribution          | Operational Result                               |
 | ------------- | ----------------------------- | ------------------------------------------------ |
 | **GOVERN**    | Logging \+ jurisdiction flags | Enables organizational oversight.                |
 | **MAP**       | Conversational Context Map    | Satisfies purpose and scope documentation.       |
@@ -358,7 +358,7 @@ Cross-session linkage of conversational content **shall be prohibited** unless e
 
 ## **8 Governance Interoperability**
 
-GEN-FIT is intentionally modular. It can be adopted as:
+GEN-FIT™ is intentionally modular. It can be adopted as:
 
 1. **A governance layer** embedded inside an organization’s AI stack.  
 2. **A compliance profile** extending existing AI RMF or ISO 42001 programs.  
@@ -435,6 +435,7 @@ Discussion and revisions will be tracked transparently in the version history.
 | 2025-10-31 | 0.1     | Initial release                                               |
 | 2025-11-14 | 0.2     | P0, bargaining & manipulation clarifications, multi-agent net |
 | 2025-11-16 | 0.3     | Clarify P0, constrain desire, cleanup                         |
+| 2025-11-16 | 0.3     | ™                                                             |
 ## **Annex A (Informative) — Implementation Examples**
 
 **Example 1: Governed Chatbot for Customer Service**

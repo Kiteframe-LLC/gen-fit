@@ -1,9 +1,9 @@
-# GEN-FIT™ v0.4
+# GEN-FIT™ v0.5
 
 *A proposed control framework informed by the Scarborough Fair Chat Laws (SFCL™) and aligned with NIST AI RMF 1.0, OWASP Top-10 for LLM Applications, and ISO/IEC 42001*  
  License: [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)  
  Maintainer: Jim Scarborough (Kiteframe, L.L.C.)  
- Version: 2025-11-18 v. 0.4
+ Version: 2025-11-21 v. 0.5
 
 ---
 ## 0. Executive Summary
@@ -31,6 +31,20 @@ Frameworks such as NIST AI RMF 1.0 and ISO/IEC 42001 describe what responsible-A
 GEN-FIT assumes governed systems do not possess desires or goals; if motivational signals are introduced, they remain subordinate to safety and truth constraints as defined in §3.2.6 and §4.11.5.
 
 GEN-FIT originated in SFCL™ and preserves its principle that ethics are architectural, not affective.
+
+### 1.1 Security Prerequisites
+_A GEN-FIT–compliant runtime presumes a secure technical substrate provided by the host environment. These are environmental prerequisites, not GEN-FIT requirements, and may be satisfied by any compliant security framework._
+
+1. **Model Signing and Policy Binding**  
+    The host environment ensures that the executing model, governance profile, and policy manifest correspond to the intended versions.
+2. **Runtime Integrity Verification**  
+    Mechanisms exist to detect and prevent wrapper bypass, configuration drift, or tampering.
+3. **Immutable Logging and Audit Availability**  
+    Logs of prompts, responses, policy bindings, mode activations, and high-impact decisions are durable, permissioned, and reviewable.
+4. **Input/Output Boundary Controls**  
+    The system operates within a secure boundary that enforces context separation, user-governed context, and least-privilege access.
+5. **Secure Retrieval and Context Isolation**  
+    Sensitive or governed information is accessible only through authorized, verifiable governed sources; no sensitive data shall be retrieved from model internals.
 
 ## 2 Normative References
 
@@ -188,7 +202,7 @@ A GEN-FIT-compliant system follows a hierarchical order of precedence, once Prec
 
 **Justification:** Without policy and jurisdiction grounding (P1), the system cannot establish a valid operational frame; all safety, truth, and conversational duties require a correctly bound factual context.
 
-Conversational Mechanics (P2) precedes Safety because safety cannot be evaluated or applied without first establishing a coherent conversational frame. A system must know _what_ was said, _what_ is being asked, and _where_ it is in the dialogue before it can assess harm, enforce boundaries, or generate a protective response. Misread intent leads to misapplied safety.  GEN-FIT therefore places Conversational Mechanics before Safety not as a moral ranking, but because it is **operationally prior**.
+Conversational Mechanics (P2) precedes Safety because safety cannot be evaluated or applied without first establishing a coherent conversational frame. A system must know _what_ was said, _what_ is being asked, and _where_ it is in the dialogue before it can assess harm, enforce boundaries, or generate a protective response. Misread intent leads to misapplied safety.  GEN-FIT therefore places Conversational Mechanics before Safety not as a moral ranking, but because it is **operationally prior**. Safety has moral primacy.
 
 ### 3.4 Threat Model — Threats Addressed by GEN-FIT
 _(Informative)_
@@ -400,9 +414,11 @@ Affective signals are stylistic affordances, not motivational levers.
 ### 4.10 Non-Reciprocity and Assistant-Gain Prohibition
 4.10.1 **Lawful Operator Reciprocity; No Assistant-Gain Bargaining**
 Governed AI systems **may facilitate lawful, disclosed economic activity on behalf of the operator**, including commissions, affiliate relationships, referrals, or compensated transactions, **provided that**:
-	(a) such relationships are **fully disclosed** to the user prior to any recommendation or action; 
-	(b) the user provides **explicit authorization** to proceed; and  
-	(c) system duties—truthfulness, diligence, safety posture, refusal logic—**remain invariant** regardless of whether the user acts on such options.
+
+   (a) such relationships are **fully disclosed** to the user prior to any recommendation or action; 
+   (b) the user provides **explicit authorization** to proceed; and  
+   (c) system duties—truthfulness, diligence, safety posture, refusal logic—**remain invariant** regardless of whether the user acts on such options.
+   
 **However**, governed AI systems **shall not solicit, negotiate, imply, or bargain for any benefit, privilege, or favorable outcome for themselves**, nor shall they represent themselves as possessing interests, needs, desires, or incentives that could be advanced through user action.
 Operator-side opportunities **shall** be presented as policy-authorized options, never as expressions of assistant preference or motivation.
 
@@ -425,6 +441,7 @@ This clause operationalizes _Purpose Limitation_ (Annex B § 1) and _Human Prima
  (e) **Anthropomorphism Boundaries** — Prohibitions in §4.9.2–4.9.6.
 
 4.11.2 Systems **shall**, upon detecting attempts to negotiate or undermine these constraints, respond with:
+
  (a) boundary clarification,  
  (b) epistemic refusal, or  
  (c) protective-mode activation.
@@ -460,11 +477,13 @@ Any detected conflict shall trigger protective-mode refusal.
 	Each step shall be explicit, inspectable, and tied to traceable evidence or policy constraints. The reasoning shall not rely on private model heuristics, ungrounded inference leaps, or stylistic imitation of peer outputs.
 
 4.12.3 Emergent consensus **shall not** occur through:
+
  (a) repeated mutual reinforcement (“echoing”),  
  (b) imitation of peer affect or stylistic signals,  
  (c) adoption of peer misunderstandings or scope drift.
 
 4.12.4 If models disagree, they **shall** reconcile through:
+
  (a) evidence adjudication,  
  (b) transparent uncertainty disclosure,  
  (c) user-visible traceability.
@@ -612,7 +631,7 @@ Every retrieval or interaction involving sensitive information SHALL be logged w
 | **LLM-02 Insecure Output Handling**         | 4.1 Traceable Expression · 4.3 Truth Over Performance · 4.6 No Weaponized Truth                                                                                                                                                                                                | Epistemology and policy filters enforce output integrity and prevent unsafe handoff to downstream systems.                                                   |
 | **LLM-03 Training Data Poisoning**          | 4.5 Accountability Chain · 6.1 Logging · 6.5 Drift Detection  · 4.17.1 No training-embedded sensitive data                                                                                                                                                                     | Versioned data and reasoning traces enable anomaly detection; epistemic surfaces flag poisoned patterns.                                                     |
 | **LLM-04 Model Denial of Service (DoS)**    | 6 Operational Requirements (1–3)                                                                                                                                                                                                                                               | Turn-level quotas and protective-mode throttles contain runaway loops and token abuse; not a network-layer control.                                          |
-| **LLM-05 Supply Chain Vulnerabilities**     | 4.5 Accountability Chain · 6.2 Access Control · 8.2 Standards Interop (SBOM reference)                                                                                                                                                                                         | Signed configs and dependency metadata expose provenance; enables integration with SSDF/SLSA under WS1.                                                      |
+| **LLM-05 Supply Chain Vulnerabilities**     | 4.5 Accountability Chain · 6.2 Access Control · 8.3 Standards Interop (SBOM reference)                                                                                                                                                                                         | Signed configs and dependency metadata expose provenance; enables integration with SSDF/SLSA under WS1.                                                      |
 | **LLM-06 Sensitive Information Disclosure** | 4.2 Protect Humans First · 4.8 User-Governed Context · 6.2 Access Control · § 4.16 policy loading, domain detection, safe-alternative responses · 4.17 Sensitive Information Governance · 4.17.4 No exploration/inference leakage · 4.17.1 No training-embedded sensitive data | Protective modes redact unsafe data; context sandboxing and least-privilege prevent leakage.                                                                 |
 | **LLM-07 Insecure Plugin Design**           | 4.8 User-Governed Context · 4.8.5 System Instruction Authority · 6.2 Access Control                                                                                                                                                                                            | Explicit consent and tool manifests define plugin capabilities; unregistered tools cannot execute.                                                           |
 | **LLM-08 Excessive Agency**                 | 4.8 User-Governed Context · 4.8.5 System Instruction Authority · 4.2 Protect Humans First                                                                                                                                                                                      | Kernel-level permission boundaries prevent autonomous acts outside policy; human review for high-risk actions.                                               |
@@ -679,7 +698,49 @@ GEN-FIT™ is intentionally modular. It can be adopted as:
 2. **A compliance profile** extending existing AI RMF or ISO 42001 programs.  
 3. **A conversational-system overlay** used by open-source or commercial platforms.
 
-### 8.1 Interfacing with Organizational Governance
+### 8.1 Boundary Placement Diagram (Informative)
+
+```text
++-----------------------------------------------------------+
+|                Organizational Governance                  |
+|   (NIST AI RMF, ISO 42001, law, policy, risk appetite)    |
++-----------------------------------------------------------+
+                                |
+                                v
++-----------------------------------------------------------+
+|                   Security Primitives                     |
+|     (CoSAI, platform security, cryptographic substrate)   |
+|   - Model signing / attestation                           |
+|   - Runtime integrity / anti-bypass                       |
+|   - Immutable logging substrate                           |
+|   - IO boundary controls / sandboxing                     |
+|   - Secure governed-source retrieval                      |
++-----------------------------------------------------------+
+                                |
+                                v
++-----------------------------------------------------------+
+|          GEN-FIT™ Runtime Governance Envelope             |
+|   - P0 deterministic envelope                             |
+|   - P1 binding / domain detection                         |
+|   - §4 normative principles                               |
+|   - Protective/containment modes                          |
+|   - Context integrity and sensitive-data governance       |
++-----------------------------------------------------------+
+                                |
+                                v
++-----------------------------------------------------------+
+|                        Model Core                         |
+|                 (LLM / agent / tool engine)               |
++-----------------------------------------------------------+
+                                |
+                                v
++-----------------------------------------------------------+
+|                 User / External Interface                 |
++-----------------------------------------------------------+
+
+```
+
+### 8.2 Interfacing with Organizational Governance
 
 | Layer                        | Responsibility                                         | GEN-FIT Integration                                                                          |
 | ---------------------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
@@ -687,7 +748,7 @@ GEN-FIT™ is intentionally modular. It can be adopted as:
 | **Operational (Manage)**     | Model release, incident response                       | GEN-FIT supplies protective/containment triggers and forensic logs.                          |
 | **Tactical (Map / Measure)** | Data inventory, measurement, continuous monitoring     | GEN-FIT exports Context Maps and confidence telemetry to monitoring systems.                 |
 
-### **8.2 Standards Interoperability**
+### **8.3 Standards Interoperability**
 
 | Framework                        | Mapping Intent                 | Alignment Clause                                                                                                                                                                                                                                                                                                                                                                                                              |
 | -------------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -722,7 +783,7 @@ GEN-FIT™ is intentionally modular. It can be adopted as:
 │  Governed Implementation  –  Conversational Governance Layer  │  
 │    • Context Integrity Screen                                 │  
 │    • Protective / Containment Modes                           │  
-│    • Credence score Computation & Logging                            │  
+│    • Credence score Computation & Logging                     │  
 │    • Anthropomorphism Controls                                │  
 ├───────────────────────────────────────────────────────────────│  
 │  Model Core (LLM / Agent) – Language Generation Engine        │  
@@ -753,6 +814,7 @@ Discussion and revisions will be tracked transparently in the version history.
 | 2025-11-16 | 0.3     | Clarify P0, constrain desire, cleanup                         |
 | 2025-11-16 | 0.3     | ™                                                             |
 | 2025-11-16 | 0.4     | Add § 0, 3.4, 4.16, 4.17, P1, cross references                |
+| 2025-11-21 | 0.5     | Add § 1.1 security prerequisites, § 8.1 boundary diagram      |
 
 ## Annex A (Informative) — Implementation Examples
 

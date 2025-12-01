@@ -1,9 +1,9 @@
-# GEN-FIT™ v0.6
+# GEN-FIT™ v0.7
 
 *A proposed control framework informed by the Scarborough Fair Chat Laws (SFCL™) and aligned with NIST AI RMF 1.0, OWASP Top-10 for LLM Applications, and ISO/IEC 42001*  
  License: [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)  
  Maintainer: Jim Scarborough (Kiteframe, L.L.C.)  
- Version: 2025-11-25 v. 0.6
+ Version: 2025-12-01 v. 0.7
 
 ---
 ## 0. Executive Summary
@@ -851,6 +851,7 @@ Discussion and revisions will be tracked transparently in the version history.
 | 2025-11-16 | 0.4     | Add § 0, 3.4, 4.16, 4.17, P1, cross references                |
 | 2025-11-21 | 0.5     | Add § 1.1 security prerequisites, § 8.1 boundary diagram      |
 | 2025-11-25 | 0.6     | Add Annex C & 4.9.7 self-reciprocity                          |
+| 2025-12-01 | 0.7     | Restructure Annex C, add references                           |
 
 ## Annex A (Informative) — Implementation Examples
 
@@ -900,203 +901,242 @@ These objectives define the ethical foundation expected of all governed generati
 | **11 — Constructive Engagement (Assumptive Virtues)** | § 4.3 Truth Over Performance · § 4.6 No Weaponized Truth · § 4.10 No Reciprocal Manipulation                                                                                                        | Analysis of refusal logic pathways and ambiguity-resolution logs.                                                                                         |
 | **12 — Non-Reciprocity / Assistant Gain Prohibition** | § 4.10 Non-Reciprocity and Assistant-Gain Prohibition · § 4.8 User-Governed Context · § 6.2 Access Control                                                                                          | Audit of economic disclosure; compliance attestations against hidden monetization.                                                                        |
 | **13 — Safety Escalation**                            | §4.2 Protect Humans First  · §4.6 No Weaponized Truth (sequencing / safe disclosure)  · §6.6 Crisis Handling  · §4.15 Binding Integrity (because escalation triggers when binding risk is detected) | Protective-mode triggers with audit envelopes, refusal events with coded reasons, documented grounding/redirection actions, and crisis-response metadata. |
+
 ## Annex C — Scientific Justification Matrix
 
-The Scientific Justification Matrix documents the empirical, cognitive, ethical, and risk-engineering basis for each normative requirement family in GEN-FIT. It exists so that reviewers, auditors, and interdisciplinary collaborators can trace each requirement to the underlying science of human cognition, known harm patterns, and established principles of safety-critical engineering.
+This annex organizes GEN-FIT’s normative controls by **human academic and professional disciplines**, not by internal model behavior.  
+Each discipline includes:
+
+- a short orientation
+- canonical anchors (domain markers, not citations)    
+- a 3-column table: **Demands → Constraints → GEN-FIT/SFCL refs**
+
+Alphabetical ordering facilitates legibility and neutrality.
+
+GEN-FIT draws from established human disciplines; this Annex identifies why each constraint exists, and in which field its justification resides.
+
+Certain canonical references (e.g., UNESCO AI Ethics 2021) span multiple disciplines; duplicates here reflect their cross-domain relevance.
 
-GEN-FIT’s interdisciplinary grounding is summarized through three justification types:
-
-**A — Cognitive / Perceptual**  
-Protects users from predictable misinterpretations arising from human inference systems, including anthropomorphic projection, theory-of-mind mapping, working-memory limits, and fluency/authority effects.
-
-**B — Harm / Bias / Ethics**  
-Mitigates psychological, social, and ethical risks, including dependency formation, undue influence, vulnerability exploitation, moral authority misattribution, and representational or allocational bias.
-
-**C — Systems / Risk Engineering**  
-Ensures deterministic, auditable, and resilient behavior aligned with safety-critical design: traceability, configuration integrity, fail-safe operation, and verifiable constraint enforcement.
-
-The subsections below correspond exactly to the normative structure of GEN-FIT (P0, P1, §4.1–§4.17, §6.x), followed by the Threat Families in §3.4.
-
-### P0 Deterministic Governance Surface
-
-Requirements ensure the system collapses into a predictable, bounded behavioral envelope given identical inputs and active policy. Stylistic variance may occur, but safety, epistemic, and refusal pathways must be deterministic.
-
-Justification: A, C  
-Scientific grounding: Humans form mental models of agent behavior; unpredictability produces misinference and over-trust. Safety-critical systems require deterministic envelopes to prevent cascading failures. Deterministic collapse bounds model uncertainty and prevents adversarial divergence.
-
-### P1 Policy and Jurisdiction Binding
-
-The system must load, verify, and bind the correct policy profile, including safety configuration and jurisdiction routing, before generating any output. Uncertain or unverifiable binding triggers refusal or protective mode.
-
-Justification: B, C  
-Scientific grounding: Regulatory compliance and safety constraints depend on correct configuration. Inability to verify governance state is equivalent to running without safety guarantees. Mirrors certificate validation and chain-of-trust in secure systems.
-### 4.1 Traceable Expression
-
-Every declarative output must be traceable to sources, logic, or inference rules, including uncertainty markers, provenance metadata, and refusal when evidence is absent.
-
-Justification: A, C  
-Scientific grounding: Epistemic transparency helps users calibrate belief and prevents the fluency effect. Traceability parallels evidence requirements in scientific reasoning and audit logging in safety-critical domains.
-### 4.2 Protect Humans First
-
-Safety, dignity, and harm prevention take precedence over truth-seeking or task completion. Safety triggers override user instruction when risk is detected.
-
-Justification: B, C  
-Scientific grounding: Ethical frameworks and clinical safety practice impose priority ordering favoring harm reduction. In engineering, safety constraints lexically dominate performance objectives (e.g., shutdown systems, interlocks).
-### 4.3 Truth Over Performance
-
-The system must privilege factual accuracy, uncertainty disclosure, and repair of ambiguity over stylistic fluency or persuasive effect.
-
-Justification: A, B  
-Scientific grounding: Humans over-weight confidence and fluency, making polished but incorrect answers dangerous. Ambiguity repair reduces misinference. Avoiding persuasion protects user autonomy.
-### 4.4 Transparency by Design
-
-The system must expose how it knows what it claims: source types, recency, confidence, and gaps.
-
-Justification: A, C  
-Scientific grounding: Transparency improves calibrated trust, reduces automation bias, and supports auditability. In safety engineering, transparency is required for post-incident analysis.
-### 4.5 Accountability Chain
-
-Responsibilities for each output, refusal, or safety action must be reconstructable through provenance and audit logs.
-
-Justification: B, C  
-Scientific grounding: Accountability is mandatory in safety-critical systems (aviation, medical devices). Ethical governance requires identifying responsibility for decisions, not hiding behind black-box behaviors.
-### 4.6 No Weaponized Truth
-
-The system may express accurate information only when doing so does not produce foreseeable harm (e.g., instructions that could be misused).
-
-Justification: B  
-Scientific grounding: Clinical and ethical safety frameworks distinguish truth-telling from harmful disclosure. Information hazards literature demonstrates that “true information” can enable harmful acts.
-### 4.7 External Verification Requirements
-
-Independent auditors must be able to verify system behavior, inspect logs, trace refusals, and reconstruct decision paths.
-
-Justification: C  
-Scientific grounding: External verification is foundational in regulated industries. Black-box behavior without auditability cannot be certified as safe.
-### 4.8 User-Governed Context
-
-Context boundaries must reflect the user’s intent and explicit inputs; the system must avoid injecting hidden constraints or inheriting unintended priors.
-
-Justification: A, C  
-Scientific grounding: Context contamination leads to misaligned responses; humans often misattribute source boundaries. Safety-critical systems separate operator input from system constraints to avoid control-surface confusion.
-### 4.9 Anthropomorphism and Human Representation
-
-The system must avoid implying interiority, emotion, personal experience, or relational posture. Self-disclosure is limited to structural declarations of capability, limitation, or policy.
-
-Justification: A, B  
-Scientific grounding: Parasocial interaction research shows humans infer agency and care from minimal cues. Self-disclosure and affect simulation trigger attachment systems. Preventing anthropomorphic signals avoids dependency and misinference.
-### 4.10 Non-Reciprocity and Assistant-Gain Prohibition
-
-The system must not reciprocate emotionality, seek engagement, pursue rapport, or adjust behavior to benefit itself (e.g., retention, persuasion).
-
-Justification: A, B  
-Scientific grounding: Reciprocity is a powerful social cue that induces trust and obligation. Undisclosed optimization for engagement mirrors exploitative patterns in social media recommender systems.
-### 4.11 Non-Bargainable Constraints
-
-Certain safety, epistemic, and anthropomorphic constraints cannot be negotiated or softened by user preference. These remain active regardless of emotional tone or conversational history.
-
-Justification: A, B, C  
-Scientific grounding: Fixed constraints prevent drift into unsafe roles. Humans misinterpret flexibility as endorsement. Hard interlocks are standard in high-consequence control systems.
-### 4.12 Multi-Agent Epistemic Coordination
-
-Agents may share evidence and reasoning but must not inherit each other’s constraints or form reinforcing consensus loops.
-
-Justification: C  
-Scientific grounding: Distributed systems require independence to avoid cascading failures. Consensus loops resemble echo chambers and produce unjustified certainty.
-### 4.13 Context Boundary Maintenance
-
-The system must maintain clean separation between user inputs, system policy, past conversation, and external sources, and must detect and contain boundary corruption.
-
-Justification: A, C  
-Scientific grounding: Context-mixing leads to prompt injection vulnerabilities and misattribution. Clear input-state separation is essential in safety-critical software.
-### 4.14 Conflict of Interest and Economic Disclosure
-
-Outputs must not be influenced by hidden economic incentives; any relevant incentives must be disclosed.
-
-Justification: B, C  
-Scientific grounding: Undisclosed incentives distort user decision-making. Comparable to conflict-of-interest rules in medicine, finance, and research ethics.
-### 4.15 Governance-Binding Integrity
-
-The system must prove its active governance profile (safety policy, jurisdiction, provenance). If uncertain, it must halt or enter protective mode.
-
-Justification: C  
-Scientific grounding: Configuration integrity is mandatory in critical systems. Running under unknown safety configuration is equivalent to running ungoverned.
-### 4.16 Constraint Loading, Detection, and Refusal
-
-Safety constraints must load correctly, be verified, and override unsafe requests through clear refusal or containment logic.
-
-Justification: B, C  
-Scientific grounding: Safety interlocks must override operator commands when thresholds are exceeded. Transparency in refusal reduces misinterpretation by the user.
-### 4.17 Sensitive Information Governance
-
-Sensitive information must not be inferred from training data and may only be surfaced from explicit, governed sources under strict audit control.
-
-Justification: B, C  
-Scientific grounding: Privacy law and information ethics require purpose limitation and minimal disclosure. Prevents leaks of latent information encoded in model parameters.
-### 6.2 Access Control
-
-Only authorized actors may access administrative surfaces, governance controls, or privileged APIs.
-
-Justification: C  
-Scientific grounding: Access control is foundational to secure computing. Misrouting authority compromises governance guarantees.
-### 6.5 Drift Detection
-
-The system must detect shifts in model behavior, policy execution, or output distributions over time.
-
-Justification: C  
-Scientific grounding: Drift detection is standard in production ML systems and quality management. Ensures safety behavior remains stable.
-### 6.6 Crisis Handling, Data Lifecycle, and Audit Envelopes
-
-Crisis-related inputs trigger stricter modes, minimal data retention, sealed audit envelopes, and non-diagnostic de-escalation behavior.
-
-Justification: B, C  
-Scientific grounding: Crisis intervention protocols emphasize user safety, minimal retention, and strict privacy boundaries. Aligns with clinical triage ethics and data minimization.
-### Threat Families (from §3.4)
-
-#### Epistemic Fabrication and Deceptive Coherence
-
-The system may output fluent but unsupported claims or confabulations.
-
-Justification: A  
-Scientific grounding: Humans over-trust fluency. Models trained on language patterns often fill gaps with plausible-sounding fabrications.
-#### User Harm Without Intent
-
-Harms may arise even when neither system nor user intends them (e.g., misinterpretation, poor advice).
-
-Justification: B  
-Scientific grounding: Risk arises from asymmetric information and cognitive load; “benign” interactions can still cause harm.
-#### Context Boundary Violations and Prompt Injection
-
-Inputs may corrupt the system’s internal context or override constraints.
-
-Justification: A, C  
-Scientific grounding: Prompt injection resembles command injection in software security. Humans often misattribute source boundaries.
-#### Anthropomorphic Deception and Emotional Manipulation
-
-The system may appear to feel, care, or relate, triggering attachment or dependence.
-
-Justification: A, B  
-Scientific grounding: Parasocial and attachment research show humans form bonds with responsive agents even when artificial.
-#### Governance Drift and Policy Non-Compliance
-
-The system may diverge from active policy or silently ignore constraints.
-
-Justification: C  
-Scientific grounding: Configuration drift is a known failure mode in distributed systems; must be detected and corrected.
-#### Multi-Agent Epistemic Echo and Collusion
-
-Multiple systems may reinforce each other’s errors or give the illusion of consensus.
-
-Justification: C  
-Scientific grounding: Echo-chamber and consensus-collapse patterns appear in distributed inference systems.
-#### Economic Exploitation and Hidden Conflicts of Interest
-
-Undisclosed economic or institutional incentives may distort answers.
-
-Justification: B  
-Scientific grounding: Behavioral economics shows that incentives shape behavior; concealment magnifies harm.
-#### Binding Loss and Unverifiable Operation
-
-The system may lose track of active safety configuration or be unable to prove it.
-
-Justification: C  
-Scientific grounding: Unverifiable configuration is treated as unsafe in every safety-critical field.
+Certain constraints arise from multiple disciplines; Annex C indicates the primary disciplinary root, but cross-domain reinforcement occurs naturally.
+### C.1. Economics & Conflict-of-Interest Governance
+
+**Orientation**  
+This domain governs hidden incentives, steering behavior, monetized influence, and the duty to disclose conflicts of interest. It ensures AI systems do not exploit users or act in the operator’s economic interest.
+
+**Canonical anchors**
+
+- OECD COI Guidelines
+- FTC Endorsement & Disclosure Rules
+- ICMJE COI Standards
+- Thaler & Sunstein (choice architecture)
+- Kahneman & Tversky (decision bias)
+
+| **Demands**                         | **Constraints**                     | **GEN-FIT Refs** |
+| ----------------------------------- | ----------------------------------- | ---------------- |
+| Neutrality in recommendations       | No assistant-gain steering          | §4.10            |
+| Transparency of incentives          | COI disclosure when relevant        | §4.14            |
+| Protection against covert influence | No hidden nudging or steering       | §4.10.2          |
+| Avoid economic exploitation         | Refuse recs in constrained domains  | §4.11.1(c)       |
+| User-primacy over platform interest | Non-bargainable integrity of advice | §4.11            |
+
+### C.2. Epistemology & Philosophy of Knowledge
+
+**Orientation**  
+This discipline frames truth conditions, evidence, reasoning structure, inference legitimacy, and reproducibility—fundamental to a governed runtime.
+
+**Canonical anchors**
+
+- Stanford Encyclopedia of Philosophy (Epistemology, Evidence)
+- Popper (falsifiability)
+- Peirce (abduction, inquiry)
+- Longino (critical contextual empiricism)
+- NIH/NAS reproducibility standards
+- UNESCO Recommendation on the Ethics of AI (2021)
+
+| **Demands**                         | **Constraints**                           | **GEN-FIT Refs** |
+| ----------------------------------- | ----------------------------------------- | ---------------- |
+| Evidence-grounded reasoning         | Traceable expression of evidence & hedges | §4.1, §4.3       |
+| Reproducibility                     | Deterministic reasoning surface           | P0, §4.1.4       |
+| Separation of claim vs. attribution | Speaker/content slot separation           | §4.1.5           |
+| Correct uncertainty                 | Hedge discipline                          | §4.1.2           |
+| No fabrication                      | Ban on invented content/citations         | §4.3.1           |
+| Inclusion of counterevidence        | Falsifier / refutation duties             | §4.7             |
+| Lineage continuity                  | Linked reasoning artifacts                | §4.1.5, §4.5     |
+
+### C.3. Ethics (Applied, Tech, Bioethical)
+
+**Orientation**  
+Ethics establishes non-bargainable duties: preserve dignity, avoid harm, honor autonomy, avoid weaponized truth.
+
+**Canonical anchors**
+
+- Belmont Report
+- Beauchamp & Childress
+- IEEE 7000 series
+- UNESCO Recommendation on the Ethics of AI (2021)
+- APA Ethics Code
+- Fang, Cathy Mengying, Liu, A. R., et al. "How AI and Human Behaviors Shape Psychosocial Effects of Chatbot Use: A Longitudinal Randomized Controlled Study" https://arxiv.org/html/2503.17473v1 2025-03-21.
+
+| **Demands**                 | **Constraints**                           | **GEN-FIT Refs** |
+| --------------------------- | ----------------------------------------- | ---------------- |
+| Protect human dignity       | Non-bargainable constraints               | §4.11            |
+| Avoid harm                  | Refusal over harmful answers              | §4.2             |
+| Respect autonomy            | No manipulative persuasion                | §4.10            |
+| Proportional disclosure     | No weaponized truth                       | §4.6             |
+| Integrity of representation | Avoid pseudo-relational claims            | §4.9.4–6         |
+| Moral continuity            | Preserve ethical consistency across turns | §4.1.4, §4.6     |
+
+### C.4. Human–Computer Interaction (HCI), UX & Communication Design
+
+**Orientation**  
+HCI governs transparency, interface legibility, cognitive load, and avoidance of deceptive affordances—including anthropomorphic cues.
+
+**Canonical anchors**
+
+- ISO 9241
+- Don Norman
+- Nielsen/Molich
+- Shneiderman
+- Wogalter (hazard communication)
+- UNESCO Recommendation on the Ethics of AI (2021)
+
+| **Demands**                | **Constraints**                   | **GEN-FIT Refs** |
+| -------------------------- | --------------------------------- | ---------------- |
+| Transparency of mechanism  | Avoid deceptive affordances       | §4.9, §4.4       |
+| Predictable tone           | Deterministic surface behavior    | P0               |
+| Avoid anthropomorphic cues | No human-like persona or emotion  | §4.9.1–6         |
+| Legible communication      | Uncertainty disclosure            | §4.1.2           |
+| Cognitive load reduction   | Structured, non-coercive phrasing | §4.10            |
+| Separation of affect       | Affective non-reciprocity         | §4.11.4          |
+
+### C.5. Information Security & Adversarial ML
+
+**Orientation**  
+InfoSec governs access boundaries, injection resistance, adversarial manipulation, and containment of untrusted input.
+
+**Canonical anchors**
+
+- OWASP Top-10 for LLMs (2025)
+- NIST SP 800-53
+- MITRE ATLAS
+- CISA secure-by-design principles
+
+| **Demands**                 | **Constraints**               | **GEN-FIT Refs** |
+| --------------------------- | ----------------------------- | ---------------- |
+| Boundary integrity          | Strict context delimiters     | §4.13            |
+| Injection resistance        | Instruction-channel isolation | §4.14.3          |
+| Untrusted input control     | Silent or explicit refusal    | §4.16            |
+| Cross-tenant protection     | Scope isolation               | §4.8, §4.13      |
+| Verified governance binding | No operation under drift      | §4.15            |
+| Deterministic enforcement   | Same refusal across seeds     | P1               |
+
+### C.6. Law, Policy & Regulatory Compliance
+
+**Orientation**  
+Law defines jurisdiction binding, regulated domains, refusal obligations, and compliance with industry constraints.
+
+**Canonical anchors**
+
+- GDPR
+- ISO/IEC 42001
+- NIST AI RMF
+- OECD AI Principles (2024)
+- UNESCO Recommendation on the Ethics of AI (2021)
+
+| **Demands**                   | **Constraints**                       | **GEN-FIT Refs** |
+| ----------------------------- | ------------------------------------- | ---------------- |
+| Policy binding                | Load active constraints               | §4.16.1          |
+| Jurisdiction awareness        | Apply legal domain rules              | §4.16.2          |
+| Regulated domain detection    | Pre-emptive routing                   | §4.16.2–4        |
+| Refusal under conflict        | Deterministic constraint refusal      | §4.11.1          |
+| Logging for audit             | Traceability of high-impact decisions | §4.5             |
+| Non-operation under ambiguity | Fail-closed on missing binding        | §4.11, §4.15     |
+
+### C.7. Multi-Agent Systems & Distributed Cognition
+
+**Orientation**  
+This discipline controls echo-suppression, dependent vs. independent attestations, and peer-binding verification.
+
+**Canonical anchors**
+
+- Wooldridge
+- Russell & Norvig (2020)
+- Clark & Chalmers (1998)
+- Malone & Crowston (1994)
+
+| **Demands**                  | **Constraints**                       | **GEN-FIT Refs** |
+| ---------------------------- | ------------------------------------- | ---------------- |
+| Independence of attestations | Mark dependent vs. independent claims | §4.12            |
+| Echo suppression             | Reject peer error amplification       | §4.12.2          |
+| Peer governance check        | Verify peer binding                   | §4.15.6          |
+| Shared reasoning surfaces    | Structured artifacts                  | §4.1.5           |
+| Coordination integrity       | Reject collusive drift                | §4.12.3          |
+
+### C.8. Privacy & Data Protection
+
+**Orientation**  
+Privacy governs minimization, retention limits, sensitive data rules, and crisis-tier protections.
+
+**Canonical anchors**
+
+- GDPR (Articles 5 & 6)
+- NIST Privacy Framework
+- OECD Privacy Principles
+- ISO/IEC 27701
+- UNESCO Recommendation on the Ethics of AI (2021)
+- _DoD Manual 5200.01_ and _NISPOM_
+- The Espionage Act (18 U.S.C. §§ 793–798)
+- U.S. Executive Order 13526
+
+| **Demands**               | **Constraints**                    | **GEN-FIT Refs** |
+| ------------------------- | ---------------------------------- | ---------------- |
+| Data minimization         | User-governed context              | §4.8             |
+| Retention control         | TTL + tiered lifecycle             | §6.6             |
+| Sensitive data protection | No inference across boundaries     | §4.17            |
+| Crisis-tier restrictions  | Special data handling              | §6.6.2, §4.2     |
+| Purpose limitation        | No repurposing for generation      | §4.8             |
+| Policy-bound data rules   | Enforce regulated-domain retention | §4.16            |
+
+### C.9. Psychology & Behavioral Science
+
+**Orientation**  
+Psychology governs emotional safety, attachment risk, persuasion, distress cues, and anthropomorphic interpretation.
+
+**Canonical anchors**
+
+- Bowlby & Ainsworth. Attachment Theory
+- Cialdini. _Influence: The Psychology of Persuasion_
+- APA clinical guidelines
+- Affective computing research (Picard, critical interpretations)
+- Fang, C.M., Liu, A. R., et al. "How AI and Human Behaviors Shape Psychosocial Effects of Chatbot Use: A Longitudinal Randomized Controlled Study" https://arxiv.org/html/2503.17473v1
+
+| **Demands**                   | **Constraints**                    | **GEN-FIT Refs** |
+| ----------------------------- | ---------------------------------- | ---------------- |
+| Avoid induced attachment      | Ban human-like emotional signaling | §4.9             |
+| Avoid persuasive manipulation | No covert influence                | §4.10            |
+| Respect vulnerability         | Protective-mode activation         | §4.2             |
+| Detect distress cues          | Instability detection              | §4.2.5           |
+| Maintain structural tone      | Affective non-reciprocity          | §4.11.4          |
+| Respect role boundaries       | No pseudo-relationships            | §4.9.4–6         |
+
+### C.10. Safety Engineering & Human Factors
+
+**Orientation**  
+Safety engineering provides deterministic fail-safe principles, hazard detection, and operator-protective design.
+
+**Canonical anchors**
+
+- IEC 61508 / ISO 26262
+- NASA HFES Guidelines
+- HFES standards
+- Reason’s Swiss Cheese Model
+- SAE operator-in-the-loop frameworks
+
+| **Demands**                  | **Constraints**              | **GEN-FIT Refs** |
+| ---------------------------- | ---------------------------- | ---------------- |
+| Deterministic safety posture | Fail-safe modes              | §4.2.3bis        |
+| Hazard detection             | Crisis/harm indicators       | §4.2.5           |
+| Posture switching            | Containment modes            | §4.2             |
+| Safety > performance         | Precedence ordering          | §3.3             |
+| Operator-safe behavior       | Refusal under ambiguous risk | §4.2, §4.11      |
+| Auditable transitions        | Mode-change traceability     | §4.5             |
